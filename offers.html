@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — Pathway{% endblock %}
+{% block body %}
+<div class="app-shell">
+  {% include "_affiliate_sidebar.html" with context %}
+  {% set active = 'dashboard' %}
+
+  <main class="app-main">
+    <div class="page-head">
+      <div>
+        <h1>Welcome back, {{ affiliate.name.split(' ')[0] }}</h1>
+        <p>Here's how your links are performing.</p>
+      </div>
+      <a href="/offers" class="btn btn-primary">Browse offers</a>
+    </div>
+
+    <div class="stat-cards">
+      <div class="stat-card">
+        <div class="sc-label">Available balance</div>
+        <div class="sc-val accent mono">${{ '%.2f'|format(affiliate.balance()) }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-label">Total earned</div>
+        <div class="sc-val mono">${{ '%.2f'|format(affiliate.total_earned()) }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-label">Total clicks</div>
+        <div class="sc-val mono">{{ total_clicks }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-label">Total conversions</div>
+        <div class="sc-val mono">{{ total_conversions }}</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Your links</h2>
+      <p class="panel-sub">Performance across every offer you're promoting.</p>
+
+      {% if links %}
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Offer</th>
+              <th class="t-right">Clicks</th>
+              <th class="t-right">Conversions</th>
+              <th class="t-right">Conv. rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for link in links %}
+            <tr>
+              <td>{{ link.offer.name }}</td>
+              <td class="t-right mono">{{ link.click_count() }}</td>
+              <td class="t-right mono">{{ link.conversion_count() }}</td>
+              <td class="t-right mono">{{ link.conversion_rate() }}%</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="empty-state">
+        <div class="es-icon">＋</div>
+        <p>You haven't grabbed any tracking links yet.</p>
+        <a href="/offers" class="btn btn-primary btn-sm">Browse offers</a>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="panel" style="margin-bottom:0;">
+      <h2>Recent conversions</h2>
+      <p class="panel-sub">The latest sales credited to your account.</p>
+
+      {% if recent_conversions %}
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Offer</th>
+              <th>Date</th>
+              <th class="t-right">Order value</th>
+              <th class="t-right">Commission</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for c in recent_conversions %}
+            <tr>
+              <td>{{ c.link.offer.name }}</td>
+              <td class="mono">{{ c.created_at.strftime('%b %d, %Y') }}</td>
+              <td class="t-right mono">${{ '%.2f'|format(c.order_value) }}</td>
+              <td class="t-right mono" style="color: var(--moss-deep); font-weight:600;">${{ '%.2f'|format(c.commission_amount) }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="empty-state">
+        <div class="es-icon">—</div>
+        <p>No conversions yet. They'll show up here as soon as one lands.</p>
+      </div>
+      {% endif %}
+    </div>
+  </main>
+</div>
+{% endblock %}

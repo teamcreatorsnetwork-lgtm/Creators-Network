@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Offers — Pathway{% endblock %}
+{% block body %}
+<div class="app-shell">
+  {% include "_affiliate_sidebar.html" with context %}
+  {% set active = 'offers' %}
+
+  <main class="app-main">
+    <div class="page-head">
+      <div>
+        <h1>Offers</h1>
+        <p>Grab a tracking link for any active offer below.</p>
+      </div>
+    </div>
+
+    {% if offers %}
+    <div class="col-3" style="border:1px solid var(--rule); background: var(--rule);">
+      {% for offer in offers %}
+      <div class="offer-card">
+        <div class="oc-top">
+          <h3>{{ offer.name }}</h3>
+          <span class="oc-commission">{{ offer.commission_label() }}</span>
+        </div>
+        <div class="oc-meta">{{ offer.advertiser.name }}</div>
+        <p>{{ offer.description or 'No description provided.' }}</p>
+
+        {% if offer.id in my_links %}
+          {% set link = my_links[offer.id] %}
+          <div class="link-row">
+            <input type="text" readonly id="link-{{ offer.id }}" value="{{ base_url }}/go/{{ link.code }}">
+            <button type="button" class="btn btn-ghost btn-sm" onclick="copyLink(this, 'link-{{ offer.id }}')">Copy</button>
+          </div>
+        {% else %}
+          <form method="POST" action="/offers/{{ offer.id }}/get-link">
+            <button type="submit" class="btn btn-primary btn-sm btn-block">Get tracking link</button>
+          </form>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="panel">
+      <div class="empty-state">
+        <div class="es-icon">—</div>
+        <p>No active offers right now. Check back soon.</p>
+      </div>
+    </div>
+    {% endif %}
+  </main>
+</div>
+{% endblock %}

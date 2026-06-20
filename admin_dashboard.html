@@ -1,0 +1,14 @@
+<div class="app-sidebar">
+  <div class="brand"><span class="mark"></span>Pathway</div>
+  <nav class="sidebar-nav">
+    <a href="/admin" class="{{ 'active' if active == 'home' }}">Overview</a>
+    <a href="/admin/advertisers" class="{{ 'active' if active == 'advertisers' }}">Advertisers</a>
+    <a href="/admin/offers" class="{{ 'active' if active == 'offers' }}">Offers</a>
+    <a href="/admin/affiliates" class="{{ 'active' if active == 'affiliates' }}">Affiliates</a>
+    <a href="/admin/payouts" class="{{ 'active' if active == 'payouts' }}">Payouts</a>
+  </nav>
+  <div class="sidebar-foot">
+    <div class="who">Admin</div>
+    <a href="/admin/logout" class="navlink" style="font-size: 13px; color: var(--muted);">Log out</a>
+  </div>
+</div>

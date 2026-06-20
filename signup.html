@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}My links — Pathway{% endblock %}
+{% block body %}
+<div class="app-shell">
+  {% include "_affiliate_sidebar.html" with context %}
+  {% set active = 'links' %}
+
+  <main class="app-main">
+    <div class="page-head">
+      <div>
+        <h1>My links</h1>
+        <p>Every tracking link tied to your account.</p>
+      </div>
+      <a href="/offers" class="btn btn-primary">Get a new link</a>
+    </div>
+
+    {% if links %}
+    {% for link in links %}
+    <div class="panel">
+      <h2>{{ link.offer.name }}</h2>
+      <p class="panel-sub">{{ link.offer.advertiser.name }} · {{ link.offer.commission_label() }}</p>
+
+      <div class="link-row" style="margin-bottom: 18px;">
+        <input type="text" readonly id="link-row-{{ link.id }}" value="{{ base_url }}/go/{{ link.code }}">
+        <button type="button" class="btn btn-ghost btn-sm" onclick="copyLink(this, 'link-row-{{ link.id }}')">Copy</button>
+      </div>
+
+      <div class="stat-cards cols-3" style="margin-bottom: 0;">
+        <div class="stat-card">
+          <div class="sc-label">Clicks</div>
+          <div class="sc-val mono">{{ link.click_count() }}</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Conversions</div>
+          <div class="sc-val mono">{{ link.conversion_count() }}</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Conv. rate</div>
+          <div class="sc-val mono">{{ link.conversion_rate() }}%</div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="panel">
+      <div class="empty-state">
+        <div class="es-icon">＋</div>
+        <p>You don't have any tracking links yet.</p>
+        <a href="/offers" class="btn btn-primary btn-sm">Browse offers</a>
+      </div>
+    </div>
+    {% endif %}
+  </main>
+</div>
+{% endblock %}

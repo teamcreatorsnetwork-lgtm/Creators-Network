@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Payouts — Admin — Pathway{% endblock %}
+{% block body %}
+<div class="app-shell">
+  {% include "_admin_sidebar.html" with context %}
+  {% set active = 'payouts' %}
+
+  <main class="app-main">
+    <div class="page-head">
+      <div>
+        <h1>Payouts</h1>
+        <p>Review and resolve affiliate payout requests.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Pending requests</h2>
+      {% if pending %}
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Affiliate</th><th>Requested</th><th class="t-right">Amount</th><th></th></tr></thead>
+          <tbody>
+            {% for p in pending %}
+            <tr>
+              <td>{{ p.affiliate.name }}<br><span style="color:var(--muted); font-size:12px;">{{ p.affiliate.email }}</span></td>
+              <td class="mono">{{ p.requested_at.strftime('%b %d, %Y') }}</td>
+              <td class="t-right mono">${{ '%.2f'|format(p.amount) }}</td>
+              <td class="t-right">
+                <form method="POST" style="display:inline-flex; gap:8px;">
+                  <input type="hidden" name="payout_id" value="{{ p.id }}">
+                  <button type="submit" name="action" value="paid" class="btn btn-primary btn-sm">Mark paid</button>
+                  <button type="submit" name="action" value="rejected" class="btn btn-ghost btn-sm">Reject</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="empty-state"><p>No pending payout requests.</p></div>
+      {% endif %}
+    </div>
+
+    <div class="panel" style="margin-bottom:0;">
+      <h2>Recently resolved</h2>
+      {% if resolved %}
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Affiliate</th><th>Resolved</th><th class="t-right">Amount</th><th>Status</th></tr></thead>
+          <tbody>
+            {% for p in resolved %}
+            <tr>
+              <td>{{ p.affiliate.name }}</td>
+              <td class="mono">{{ p.resolved_at.strftime('%b %d, %Y') if p.resolved_at else '—' }}</td>
+              <td class="t-right mono">${{ '%.2f'|format(p.amount) }}</td>
+              <td>
+                {% if p.status == 'paid' %}
+                  <span class="badge badge-green">Paid</span>
+                {% else %}
+                  <span class="badge badge-clay">Rejected</span>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="empty-state"><p>Nothing resolved yet.</p></div>
+      {% endif %}
+    </div>
+  </main>
+</div>
+{% endblock %}

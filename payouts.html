@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}Pathway — Performance affiliate network{% endblock %}
+{% block body %}
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="mark"></span>Pathway</div>
+    <div class="nav-links">
+      <a href="#how" class="navlink">How it works</a>
+      <a href="/login" class="navlink">Log in</a>
+      <a href="/signup" class="btn btn-primary btn-sm">Join as an affiliate</a>
+    </div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Performance affiliate network</div>
+      <h1>Every click,<br>accounted <em>for</em>.</h1>
+      <p class="lede">Pathway tracks the full path from link to sale, so affiliates get paid for exactly what they drive — no spreadsheets, no disputes, no waiting on someone to remember.</p>
+      <div class="hero-actions">
+        <a href="/signup" class="btn btn-primary">Join as an affiliate</a>
+        <a href="#how" class="btn btn-ghost">See how it works</a>
+      </div>
+      <div class="stat-row">
+        <div>
+          <div class="stat-num mono">{{ offer_count }}</div>
+          <div class="stat-label">Active offers</div>
+        </div>
+        <div>
+          <div class="stat-num mono">{{ affiliate_count }}</div>
+          <div class="stat-label">Affiliates earning</div>
+        </div>
+        <div>
+          <div class="stat-num mono">0%</div>
+          <div class="stat-label">Setup cost</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ledger-card">
+      <div class="ledger-head">
+        <span class="t">Affiliate ledger</span>
+        <span>This month</span>
+      </div>
+      <div class="ledger-row"><span class="lr-label">Trailblazer Backpack 30L</span><span class="lr-val">412 clicks</span></div>
+      <div class="ledger-row"><span class="lr-label">→ Conversions</span><span class="lr-val positive">23 sales</span></div>
+      <div class="ledger-row"><span class="lr-label">Lumen Pro Annual Plan</span><span class="lr-val">198 clicks</span></div>
+      <div class="ledger-row"><span class="lr-label">→ Conversions</span><span class="lr-val positive">9 sales</span></div>
+      <div class="ledger-total"><span class="lr-label">Commission owed</span><span class="lr-val">$1,284.50</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>How the loop closes</h2>
+      <p>Three steps connect your promotion to your payout, all logged and timestamped.</p>
+    </div>
+    <div class="col-3">
+      <div class="flow-step">
+        <span class="fs-num mono">01</span>
+        <div>
+          <h3>Generate a link</h3>
+          <p>Pick an offer, get a unique tracking link tied to your account. No approval queue for live offers.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <span class="fs-num mono">02</span>
+        <div>
+          <h3>Drive traffic</h3>
+          <p>Share it however you reach your audience. Every click is logged the moment it happens.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <span class="fs-num mono">03</span>
+        <div>
+          <h3>Get paid</h3>
+          <p>Conversions credit your balance automatically. Request a payout whenever you're ready.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Built for affiliates first</h2>
+      <p>No hidden commission math, no chasing advertisers for confirmation.</p>
+    </div>
+    <div class="col-3">
+      <div>
+        <h3 style="font-family: var(--font-body); font-size: 16px; margin-bottom: 8px;">Transparent commissions</h3>
+        <p style="color: var(--muted); font-size: 14px; margin:0;">Every offer shows its exact rate upfront — percentage of sale or flat fee, no surprises at payout time.</p>
+      </div>
+      <div>
+        <h3 style="font-family: var(--font-body); font-size: 16px; margin-bottom: 8px;">Real-time tracking</h3>
+        <p style="color: var(--muted); font-size: 14px; margin:0;">Clicks and conversions appear on your dashboard the instant they happen, down to the individual link.</p>
+      </div>
+      <div>
+        <h3 style="font-family: var(--font-body); font-size: 16px; margin-bottom: 8px;">Simple payouts</h3>
+        <p style="color: var(--muted); font-size: 14px; margin:0;">Request a payout against your available balance anytime. Track every request from pending to paid.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer wrap">
+  <div class="brand" style="font-size: 15px;"><span class="mark"></span>Pathway</div>
+  <div>Demo platform — not a real payments product.</div>
+</footer>
+
+{% endblock %}

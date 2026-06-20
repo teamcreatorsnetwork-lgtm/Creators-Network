@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Admin — Pathway{% endblock %}
+{% block body %}
+<div class="app-shell">
+  {% include "_admin_sidebar.html" with context %}
+  {% set active = 'home' %}
+
+  <main class="app-main">
+    <div class="page-head">
+      <div>
+        <h1>Network overview</h1>
+        <p>A snapshot of activity across the platform.</p>
+      </div>
+    </div>
+
+    <div class="stat-cards">
+      <div class="stat-card">
+        <div class="sc-label">Affiliates</div>
+        <div class="sc-val mono">{{ stats.affiliates }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-label">Advertisers</div>
+        <div class="sc-val mono">{{ stats.advertisers }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-label">Active offers</div>
+        <div class="sc-val mono">{{ stats.offers }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-label">Pending payouts</div>
+        <div class="sc-val accent mono">{{ stats.pending_payouts }}</div>
+      </div>
+    </div>
+
+    <div class="stat-cards cols-3">
+      <div class="stat-card">
+        <div class="sc-label">Total clicks</div>
+        <div class="sc-val mono">{{ stats.clicks }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-label">Total conversions</div>
+        <div class="sc-val mono">{{ stats.conversions }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-label">Network conv. rate</div>
+        <div class="sc-val mono">{{ ((stats.conversions / stats.clicks * 100) if stats.clicks else 0)|round(1) }}%</div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-bottom:0;">
+      <h2>Quick actions</h2>
+      <p class="panel-sub">Common admin tasks.</p>
+      <div style="display:flex; gap:12px;">
+        <a href="/admin/advertisers" class="btn btn-ghost">Add an advertiser</a>
+        <a href="/admin/offers" class="btn btn-ghost">Create an offer</a>
+        <a href="/admin/payouts" class="btn btn-primary">Review payouts</a>
+      </div>
+    </div>
+  </main>
+</div>
+{% endblock %}

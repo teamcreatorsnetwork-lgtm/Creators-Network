@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Affiliates — Admin — Pathway{% endblock %}
+{% block body %}
+<div class="app-shell">
+  {% include "_admin_sidebar.html" with context %}
+  {% set active = 'affiliates' %}
+
+  <main class="app-main">
+    <div class="page-head">
+      <div>
+        <h1>Affiliates</h1>
+        <p>Everyone signed up to promote offers on the network.</p>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-bottom:0;">
+      {% if affiliates %}
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>Email</th><th>Joined</th><th class="t-right">Earned</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            {% for a in affiliates %}
+            <tr>
+              <td>{{ a.name }}</td>
+              <td class="mono" style="color: var(--muted);">{{ a.email }}</td>
+              <td class="mono">{{ a.created_at.strftime('%b %d, %Y') }}</td>
+              <td class="t-right mono">${{ '%.2f'|format(a.total_earned()) }}</td>
+              <td>
+                {% if a.status == 'suspended' %}
+                  <span class="badge badge-clay">Suspended</span>
+                {% else %}
+                  <span class="badge badge-green">Active</span>
+                {% endif %}
+              </td>
+              <td class="t-right">
+                <form method="POST" action="/admin/affiliates/{{ a.id }}/toggle-suspend">
+                  <button type="submit" class="btn btn-ghost btn-sm">{{ 'Reinstate' if a.status == 'suspended' else 'Suspend' }}</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="empty-state"><p>No affiliates have signed up yet.</p></div>
+      {% endif %}
+    </div>
+  </main>
+</div>
+{% endblock %}

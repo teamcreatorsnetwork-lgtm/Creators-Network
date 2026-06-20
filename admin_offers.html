@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Advertisers — Admin — Pathway{% endblock %}
+{% block body %}
+<div class="app-shell">
+  {% include "_admin_sidebar.html" with context %}
+  {% set active = 'advertisers' %}
+
+  <main class="app-main">
+    <div class="page-head">
+      <div>
+        <h1>Advertisers</h1>
+        <p>Brands running offers on the network.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Add an advertiser</h2>
+      <p class="panel-sub">Advertisers are added by admin — they don't self-register.</p>
+      <form method="POST" style="display:flex; gap:12px; align-items:flex-end;">
+        <div class="field" style="margin-bottom:0; flex:1;">
+          <label for="name">Advertiser name</label>
+          <input type="text" id="name" name="name" placeholder="Northwind Outdoor Gear" required>
+        </div>
+        <div class="field" style="margin-bottom:0; flex:1;">
+          <label for="website">Website</label>
+          <input type="text" id="website" name="website" placeholder="https://example.com">
+        </div>
+        <button type="submit" class="btn btn-primary">Add advertiser</button>
+      </form>
+    </div>
+
+    <div class="panel" style="margin-bottom:0;">
+      <h2>All advertisers</h2>
+      {% if advertisers %}
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>Website</th><th class="t-right">Offers</th></tr></thead>
+          <tbody>
+            {% for a in advertisers %}
+            <tr>
+              <td>{{ a.name }}</td>
+              <td class="mono" style="color: var(--muted);">{{ a.website or '—' }}</td>
+              <td class="t-right mono">{{ a.offers|length }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="empty-state"><p>No advertisers yet.</p></div>
+      {% endif %}
+    </div>
+  </main>
+</div>
+{% endblock %}
