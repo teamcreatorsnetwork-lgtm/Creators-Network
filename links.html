@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Payouts — Admin — Pathway{% endblock %}
+{% block title %}Payouts - Admin - Pathway{% endblock %}
 {% block body %}
 <div class="app-shell">
   {% include "_admin_sidebar.html" with context %}
@@ -52,7 +52,7 @@
             {% for p in resolved %}
             <tr>
               <td>{{ p.affiliate.name }}</td>
-              <td class="mono">{{ p.resolved_at.strftime('%b %d, %Y') if p.resolved_at else '—' }}</td>
+              <td class="mono">{{ p.resolved_at.strftime('%b %d, %Y') if p.resolved_at else '-' }}</td>
               <td class="t-right mono">${{ '%.2f'|format(p.amount) }}</td>
               <td>
                 {% if p.status == 'paid' %}

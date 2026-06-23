@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Advertisers — Admin — Pathway{% endblock %}
+{% block title %}Advertisers - Admin - Pathway{% endblock %}
 {% block body %}
 <div class="app-shell">
   {% include "_admin_sidebar.html" with context %}
@@ -15,7 +15,7 @@
 
     <div class="panel">
       <h2>Add an advertiser</h2>
-      <p class="panel-sub">Advertisers are added by admin — they don't self-register.</p>
+      <p class="panel-sub">Advertisers are added by admin - they don't self-register.</p>
       <form method="POST" style="display:flex; gap:12px; align-items:flex-end;">
         <div class="field" style="margin-bottom:0; flex:1;">
           <label for="name">Advertiser name</label>
@@ -39,7 +39,7 @@
             {% for a in advertisers %}
             <tr>
               <td>{{ a.name }}</td>
-              <td class="mono" style="color: var(--muted);">{{ a.website or '—' }}</td>
+              <td class="mono" style="color: var(--muted);">{{ a.website or '-' }}</td>
               <td class="t-right mono">{{ a.offers|length }}</td>
             </tr>
             {% endfor %}

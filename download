@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Offers — Pathway{% endblock %}
+{% block title %}Offers - Pathway{% endblock %}
 {% block body %}
 <div class="app-shell">
   {% include "_affiliate_sidebar.html" with context %}
@@ -41,7 +41,7 @@
     {% else %}
     <div class="panel">
       <div class="empty-state">
-        <div class="es-icon">—</div>
+        <div class="es-icon">-</div>
         <p>No active offers right now. Check back soon.</p>
       </div>
     </div>

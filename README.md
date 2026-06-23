@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Simulate a conversion — Pathway{% endblock %}
+{% block title %}Simulate a conversion - Pathway{% endblock %}
 {% block body %}
 <div class="auth-shell">
   <div class="auth-card" style="max-width: 460px;">
@@ -8,7 +8,7 @@
     <p class="auth-sub">This page stands in for a merchant's checkout confirmation, which would normally notify Pathway automatically when an order completes.</p>
 
     <div class="demo-banner">
-      <strong>Demo tool.</strong> In production, this step is a server-to-server postback from the advertiser's checkout — not a page a visitor fills in.
+      <strong>Demo tool.</strong> In production, this step is a server-to-server postback from the advertiser's checkout - not a page a visitor fills in.
     </div>
 
     {% if link %}
